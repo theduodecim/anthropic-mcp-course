@@ -1,7 +1,9 @@
 from core.claude import Claude
 from mcp_client import MCPClient
 from core.tools import ToolManager
-from anthropic.types import MessageParam
+# uncomment this if you have a Claude API key
+# from anthropic.types import MessageParam
+MessageParam = dict  # OpenRouter-compatible: {"role": str, "content": str | list}
 
 
 class Chat:

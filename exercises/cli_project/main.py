@@ -13,18 +13,21 @@ from core.cli import CliApp
 load_dotenv()
 
 # Anthropic Config
-claude_model = os.getenv("CLAUDE_MODEL", "")
-anthropic_api_key = os.getenv("ANTHROPIC_API_KEY", "")
+# uncomment this if you have a Claude API key
+# claude_model = os.getenv("CLAUDE_MODEL", "")
+# anthropic_api_key = os.getenv("ANTHROPIC_API_KEY", "")
+# assert claude_model, "Error: CLAUDE_MODEL cannot be empty. Update .env"
+# assert anthropic_api_key, "Error: ANTHROPIC_API_KEY cannot be empty. Update .env"
 
-
-assert claude_model, "Error: CLAUDE_MODEL cannot be empty. Update .env"
-assert anthropic_api_key, (
-    "Error: ANTHROPIC_API_KEY cannot be empty. Update .env"
-)
+openrouter_api_key = os.getenv("OPENROUTER_API_KEY", "")
+openrouter_model = os.getenv("OPENROUTER_MODEL", "nvidia/nemotron-3-super-120b-a12b:free")
+assert openrouter_api_key, "Error: OPENROUTER_API_KEY cannot be empty. Update .env"
 
 
 async def main():
-    claude_service = Claude(model=claude_model)
+    # uncomment this if you have a Claude API key
+    # claude_service = Claude(model=claude_model)
+    claude_service = Claude(model=openrouter_model)
 
     server_scripts = sys.argv[1:]
     clients = {}

@@ -2,7 +2,10 @@ import json
 from typing import Optional, Literal, List
 from mcp.types import CallToolResult, Tool, TextContent
 from mcp_client import MCPClient
-from anthropic.types import Message, ToolResultBlockParam
+# uncomment this if you have a Claude API key
+# from anthropic.types import Message, ToolResultBlockParam
+Message = object          # duck-typed OpenRouterMessage
+ToolResultBlockParam = dict
 
 
 class ToolManager:

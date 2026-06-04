@@ -3,7 +3,6 @@ from mcp.server.fastmcp import FastMCP
 
 mcp = FastMCP("DocumentMCP", log_level="ERROR")
 
-
 docs = {
     "deposition.md": "This deposition covers the testimony of Angela Smith, P.E.",
     "report.pdf": "The report details the state of a 20m condenser tower.",
@@ -13,44 +12,44 @@ docs = {
     "spec.txt": "These specifications define the technical requirements for the equipment.",
 }
 
-# TODO: Write a tool to read a doc
-@mcp.tool(
-    name: "read_doc_contents",
-    description: "Read the contents of a document an return it as a string."
-)
 
-def read_dococument(
-    doc_id: str = Field(description: "Id of the document to read")
+@mcp.tool(
+    name="read_doc_contents",
+    description="Read the contents of a document and return it as a string."
+)
+def read_document(
+    doc_id: str = Field(description="ID of the document to read")
 ):
-    if doc_id no in docs: 
-        raise valueError(f"Doc with id : {doc_id} not found")
+    if doc_id not in docs:
+        raise ValueError(f"Document with ID '{doc_id}' not found")
+
     return docs[doc_id]
 
 
-# TODO: Write a tool to edit a doc
 @mcp.tool(
-    name: "edit_document",
-    description: "Edit a document by replacing a string in the documents content with a new string"
+    name="edit_document",
+    description="Edit a document by replacing text in the document content."
 )
-def edit_dococument(
-    doc_id: str = Field(description="Id of the document that will be edited"),
+def edit_document(
+    doc_id: str = Field(description="ID of the document to edit"),
     old_str: str = Field(
-        description="The text to replace. Must match exactly, including whitespace"
+        description="The text to replace. Must match exactly, including whitespace."
     ),
     new_str: str = Field(
-        description="The new text to insert in place of the old text"
+        description="The new text to insert in place of the old text."
     ),
 ):
-     if doc_id not in docs:
-        raise ValueError(f"Doc with id {doc_id} not found")
-        
+    if doc_id not in docs:
+        raise ValueError(f"Document with ID '{doc_id}' not found")
+
     docs[doc_id] = docs[doc_id].replace(old_str, new_str)
 
+    return {
+        "success": True,
+        "doc_id": doc_id,
+        "updated_content": docs[doc_id]
+    }
 
-# TODO: Write a resource to return all doc id's
-# TODO: Write a resource to return the contents of a particular doc
-# TODO: Write a prompt to rewrite a doc in markdown format
-# TODO: Write a prompt to summarize a doc
 
 if __name__ == "__main__":
-    mcp.run(transport="stdio")
+    mcp.run()

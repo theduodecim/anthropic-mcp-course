@@ -1,0 +1,17 @@
+{
+  "name": "anthropic-mcp-course-showcase",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "devDependencies": {
+    "vite": "^7.0.0"
+  },
+  "dependencies": {
+    "mermaid": "^11.4.1"
+  }
+}
